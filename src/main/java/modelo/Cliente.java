@@ -1,6 +1,6 @@
 package modelo;
 
-import java.util.List;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * @author gubec
@@ -13,16 +13,16 @@ public class Cliente {
     private String telefone;
     private String cep;
     private String email;
-    private List<Animal> animais;
+    // private List<Animal> animais;
 
-    public Cliente(final Integer id, final String nome, final String endereco, final String telefone, final String cep, final String email, final List<Animal> animais) {
+    public Cliente(final Integer id, final String nome, final String endereco, final String telefone, final String cep, final String email) {
         this.id = id;
         this.nome = nome;
         this.endereco = endereco;
         this.telefone = telefone;
         this.cep = cep;
         this.email = email;
-        this.animais = animais;
+        //this.animais = new ArrayList<>();
     }
 
     public Integer getId() {
@@ -70,14 +70,29 @@ public class Cliente {
     }
 
     public void setEmail(final String email) {
-        this.email = email;
+        if (StringUtils.isBlank(email)) {
+            this.email = email;
+        }
     }
 
-    public List<Animal> getAnimais() {
-        return this.animais;
+   /* public List<Animal> getAnimais() {
+        return new ArrayList<>(this.animais);
     }
 
     public void setAnimais(final List<Animal> animais) {
         this.animais = animais;
+    }
+
+    public void addAnimal(final Animal animal) {
+        if (StringUtils.isNotBlank(animal.getNome())) {
+            this.animais.add(animal);
+        }
+    }*/
+
+    @Override
+    public String toString() {
+//        final String clienteAnimais = this.animais.toString();
+//        return desc + "\n" + clienteAnimais;
+        return "Cliente{" + "nome=" + this.nome + ", endereco=" + this.endereco + ", telefone=" + this.telefone + ", cep=" + ", email=" + this.email + "}";
     }
 }

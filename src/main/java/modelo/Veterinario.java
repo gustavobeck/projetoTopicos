@@ -4,13 +4,13 @@ public class Veterinario {
 
     private Integer id;
     private String nome;
-    private String endereco;
+    private String email;
     private String telefone;
 
-    public Veterinario(final Integer id, final String nome, final String endereco, final String telefone) {
+    public Veterinario(final Integer id, final String nome, final String email, final String telefone) {
         this.id = id;
         this.nome = nome;
-        this.endereco = endereco;
+        this.email = email;
         this.telefone = telefone;
     }
 
@@ -30,12 +30,12 @@ public class Veterinario {
         this.nome = nome;
     }
 
-    public String getEndereco() {
-        return this.endereco;
+    public String getEmail() {
+        return this.email;
     }
 
-    public void setEndereco(final String endereco) {
-        this.endereco = endereco;
+    public void setEmail(final String email) {
+        this.email = email;
     }
 
     public String getTelefone() {
