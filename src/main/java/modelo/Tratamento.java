@@ -5,13 +5,15 @@ import java.time.LocalDate;
 public class Tratamento {
 
     private Integer id;
+    private String nome;
     private LocalDate dataInicio;
     private LocalDate dataFim;
     private Integer idAnimal;
     private boolean terminou;
 
-    public Tratamento(final Integer id, final LocalDate dataInicio, final LocalDate dataFim, final Integer idAnimal, final boolean terminou) {
+    public Tratamento(final Integer id, final String nome, final LocalDate dataInicio, final LocalDate dataFim, final Integer idAnimal, final boolean terminou) {
         this.id = id;
+        this.nome = nome;
         this.dataInicio = dataInicio;
         this.dataFim = dataFim;
         this.idAnimal = idAnimal;
@@ -56,5 +58,13 @@ public class Tratamento {
 
     public void setTerminou(final boolean terminou) {
         this.terminou = terminou;
+    }
+
+    public String getNome() {
+        return this.nome;
+    }
+
+    public void setNome(final String nome) {
+        this.nome = nome;
     }
 }

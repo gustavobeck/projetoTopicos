@@ -3,12 +3,12 @@ package modelo;
 public class Exame {
 
     private Integer id;
-    private String descricao;
+    private String nome;
     private Integer idConsulta;
 
-    public Exame(final Integer id, final String descricao, final Integer idConsulta) {
+    public Exame(final Integer id, final String nome, final Integer idConsulta) {
         this.id = id;
-        this.descricao = descricao;
+        this.nome = nome;
         this.idConsulta = idConsulta;
     }
 
@@ -20,12 +20,12 @@ public class Exame {
         this.id = id;
     }
 
-    public String getDescricao() {
-        return this.descricao;
+    public String getNome() {
+        return this.nome;
     }
 
-    public void setDescricao(final String descricao) {
-        this.descricao = descricao;
+    public void setNome(final String nome) {
+        this.nome = nome;
     }
 
     public Integer getIdConsulta() {
