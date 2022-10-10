@@ -79,13 +79,13 @@ public class AnimalDAO extends DAO {
     }
 
     //RetrieveByIdCliente
-    public List<Animal> retrieveByIdCliente(final Integer id) {
+    public List retrieveByIdCliente(final Integer id) {
         return this.retrieve("SELECT * FROM animal WHERE id_cliente = " + id);
     }
 
     //RetrieveBySimilarName
-    public List<Animal> retrieveBySimilarName(final String nome) {
-        return this.retrieve("SELECT * FROM animal WHERE nome LIKE '%" + nome + "%'");
+    public List retrieveBySimilarName(final Integer id, final String nome) {
+        return this.retrieve("SELECT * FROM animal WHERE id_cliente = " + id + " AND nome LIKE '%" + nome + "%'");
     }
 
     //Update

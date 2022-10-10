@@ -27,7 +27,7 @@ public class VeterinarioDAO extends DAO {
     public Veterinario create(final String nome, final String email, final String telefone) {
         try {
             final PreparedStatement stmt;
-            stmt = DAO.getConnection().prepareStatement("INSERT INTO veterinario (nome, email, telefone) VALUES (?, ?, ?)");
+            stmt = DAO.getConnection().prepareStatement("INSERT INTO vet (nome, email, telefone) VALUES (?, ?, ?)");
             stmt.setString(1, nome);
             stmt.setString(2, email);
             stmt.setString(3, telefone);
@@ -35,11 +35,11 @@ public class VeterinarioDAO extends DAO {
         } catch (final SQLException e) {
             Logger.getLogger(VeterinarioDAO.class.getName()).log(Level.SEVERE, null, e);
         }
-        return this.retrieveById(lastId("veterinario", "id"));
+        return this.retrieveById(lastId("vet", "id"));
     }
 
     public boolean isLastEmpty() {
-        final Veterinario lastVeterinario = this.retrieveById(lastId("veterinario", "id"));
+        final Veterinario lastVeterinario = this.retrieveById(lastId("vet", "id"));
         if (lastVeterinario != null) {
             return StringUtils.isBlank(lastVeterinario.getNome());
         }
@@ -71,31 +71,31 @@ public class VeterinarioDAO extends DAO {
     }
 
     //RetrieveAll
-    public List<Veterinario> retrieveAll() {
-        return this.retrieve("SELECT * FROM veterinario");
+    public List retrieveAll() {
+        return this.retrieve("SELECT * FROM vet");
     }
 
     //RetrieveLast
     public List<Veterinario> retrieveLast() {
-        return this.retrieve("SELECT * FROM veterinario WHERE id = " + lastId("animal", "id"));
+        return this.retrieve("SELECT * FROM vet WHERE id = " + lastId("animal", "id"));
     }
 
     //RetrieveById
     public Veterinario retrieveById(final Integer id) {
-        final List<Veterinario> veterinarios = this.retrieve("SELECT * FROM veterinario WHERE id = " + id);
+        final List<Veterinario> veterinarios = this.retrieve("SELECT * FROM vet WHERE id = " + id);
         return (veterinarios.isEmpty() ? null : veterinarios.get(0));
     }
 
     //RetrieveBySimilarName
-    public List<Veterinario> retrieveBySimilarName(final String nome) {
-        return this.retrieve("SELECT * FROM veterinario WHERE nome LIKE '%" + nome + "%'");
+    public List retrieveBySimilarName(final String nome) {
+        return this.retrieve("SELECT * FROM vet WHERE nome LIKE '%" + nome + "%'");
     }
 
     //Update
     public void update(final Veterinario veterinario) {
         try {
             final PreparedStatement stmt;
-            stmt = DAO.getConnection().prepareStatement("UPDATE veterinario SET nome=?, email=?, telefone=? WHERE id=?");
+            stmt = DAO.getConnection().prepareStatement("UPDATE vet SET nome=?, email=?, telefone=? WHERE id=?");
             stmt.setString(1, veterinario.getNome());
             stmt.setString(2, veterinario.getEmail());
             stmt.setString(3, veterinario.getTelefone());
@@ -110,7 +110,7 @@ public class VeterinarioDAO extends DAO {
     public void delete(final Veterinario veterinario) {
         final PreparedStatement stmt;
         try {
-            stmt = DAO.getConnection().prepareStatement("DELETE FROM veterinario WHERE id = ?");
+            stmt = DAO.getConnection().prepareStatement("DELETE FROM vet WHERE id = ?");
             stmt.setInt(1, veterinario.getId());
             executeUpdate(stmt);
         } catch (final SQLException e) {

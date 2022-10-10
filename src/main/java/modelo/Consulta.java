@@ -1,20 +1,22 @@
 package modelo;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 public class Consulta {
 
     private Integer id;
-    private LocalDateTime dataConsulta;
+    private LocalDate dataConsulta;
+    private String horario;
     private String historico;
     private Integer idAnimal;
     private Integer idVeterinario;
     private Integer idTratamento;
     private boolean terminou;
 
-    public Consulta(final Integer id, final LocalDateTime dataConsulta, final String historico, final Integer idAnimal, final Integer idVeterinario, final Integer idTratamento, final boolean terminou) {
+    public Consulta(final Integer id, final LocalDate dataConsulta, final String horario, final String historico, final Integer idAnimal, final Integer idVeterinario, final Integer idTratamento, final boolean terminou) {
         this.id = id;
         this.dataConsulta = dataConsulta;
+        this.horario = horario;
         this.historico = historico;
         this.idAnimal = idAnimal;
         this.idVeterinario = idVeterinario;
@@ -30,11 +32,11 @@ public class Consulta {
         this.id = id;
     }
 
-    public LocalDateTime getDataConsulta() {
+    public LocalDate getDataConsulta() {
         return this.dataConsulta;
     }
 
-    public void setDataConsulta(final LocalDateTime dataConsulta) {
+    public void setDataConsulta(final LocalDate dataConsulta) {
         this.dataConsulta = dataConsulta;
     }
 
@@ -76,5 +78,13 @@ public class Consulta {
 
     public void setTerminou(final boolean terminou) {
         this.terminou = terminou;
+    }
+
+    public String getHorario() {
+        return this.horario;
+    }
+
+    public void setHorario(final String horario) {
+        this.horario = horario;
     }
 }

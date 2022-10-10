@@ -3,9 +3,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 
-import modelo.AnimalDAO;
-import modelo.Cliente;
-import modelo.ClienteDAO;
+import modelo.ConsultaDAO;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 /**
  * @author gubec
@@ -30,18 +31,20 @@ public class Main {
 //        System.out.println(animais);
 
 
-        //ClienteDAO.getInstance().create("Gustavo", "Artur Nogueira", "1999999999", "00000-000", "xxxx@gmail.com");
+        //ClienteDAO.getInstance().create("Gustavo", "Artur Nogueira", "13160-340", "xxxx@gmail.com", "19999999999");
 //
-        final Cliente c1 = ClienteDAO.getInstance().retrieveById(1);
+        //final Cliente c1 = ClienteDAO.getInstance().retrieve("SELECT * from cliente where email = xxxx@gmail.com").get(0);
+        //System.out.println(ClienteDAO.getInstance().retrieve("SELECT * from cliente where email = 'xxxx@gmail.com'").get(0));
+        ConsultaDAO.getInstance().create(LocalDate.parse("10/12/2022", DateTimeFormatter.ofPattern("dd/MM/yyyy")), "13:10", "Nenhum", 1, 1, 0, true);
 //        System.out.println(c1);
 
 //        System.out.println(ClienteDAO.getInstance().retrieveAll());
 
 //        AnimalDAO.getInstance().create("Safira", 2006, "Femea", 1, c1);
 //        System.out.println(AnimalDAO.getInstance().retrieveAll());
-        AnimalDAO.getInstance().create("Apolo", 2006, "Macho", 1, c1);
+        // AnimalDAO.getInstance().create("Apolo", 2006, "Macho", 1, c1);
 
-        System.out.println(AnimalDAO.getInstance().retrieveByIdCliente(c1.getId()));
+        // System.out.println(AnimalDAO.getInstance().retrieveByIdCliente(c1.getId()));
     }
 
 }

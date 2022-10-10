@@ -77,7 +77,7 @@ public class ClienteDAO extends DAO {
     }
 
     //RetrieveBySimilarName
-    public List<Cliente> retrieveBySimilarName(final String nome) {
+    public List retrieveBySimilarName(final String nome) {
         return this.retrieve("SELECT * FROM cliente WHERE nome LIKE '%" + nome + "%'");
     }
 

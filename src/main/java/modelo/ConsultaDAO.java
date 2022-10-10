@@ -3,7 +3,7 @@ package modelo;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -23,19 +23,20 @@ public class ConsultaDAO extends DAO {
     }
 
     //CRUD
-    public Consulta create(final LocalDateTime dataConsulta, final String historico, final Integer idAnimal, final Integer idVeterinario,
+    public Consulta create(final LocalDate dataConsulta, final String horario, final String historico, final Integer idAnimal, final Integer idVeterinario,
                            final Integer idTratamento, final boolean terminou) {
         try {
             final PreparedStatement stmt;
 
             stmt = DAO.getConnection()
-                    .prepareStatement("INSERT INTO consulta (data, historico, id_animal, id_vet, id_tratamento, terminado) VALUES (?, ?, ?, ?, ?, ?)");
-            stmt.setString(1, dateTimeFormat.format(dataConsulta));
-            stmt.setString(2, historico);
-            stmt.setInt(3, idAnimal);
-            stmt.setInt(4, idVeterinario);
-            stmt.setInt(5, idTratamento);
-            stmt.setInt(6, terminou ? 1 : 0);
+                    .prepareStatement("INSERT INTO consulta (data, horario, historico, id_animal, id_vet, id_tratamento, terminado) VALUES (?, ?, ?, ?, ?, ?, ?)");
+            stmt.setString(1, dateFormat.format(dataConsulta));
+            stmt.setString(2, horario);
+            stmt.setString(3, historico);
+            stmt.setInt(4, idAnimal);
+            stmt.setInt(5, idVeterinario);
+            stmt.setInt(6, idTratamento);
+            stmt.setInt(7, terminou ? 1 : 0);
             executeUpdate(stmt);
         } catch (final SQLException e) {
             Logger.getLogger(ConsultaDAO.class.getName()).log(Level.SEVERE, null, e);
@@ -47,8 +48,8 @@ public class ConsultaDAO extends DAO {
         Consulta consulta = null;
         try {
             consulta =
-                    new Consulta(rs.getInt("id"), LocalDateTime.parse(rs.getString("data"), dateTimeFormat), rs.getString("historico"), rs.getInt("id_animal"),
-                            rs.getInt("id_veterinario"), rs.getInt("id_tratamento"), rs.getInt("terminado") == 1);
+                    new Consulta(rs.getInt("id"), LocalDate.parse(rs.getString("data"), dateFormat), rs.getString("horario"), rs.getString("historico"), rs.getInt("id_animal"),
+                            rs.getInt("id_vet"), rs.getInt("id_tratamento"), rs.getInt("terminado") == 1);
         } catch (final SQLException e) {
             System.err.println("Exception: " + e.getMessage());
         }
@@ -71,7 +72,7 @@ public class ConsultaDAO extends DAO {
 
     //RetrieveAll
     public List<Consulta> retrieveAll() {
-        return this.retrieve("SELECT * FROM consulta");
+        return this.retrieve("SELECT * FROM consulta ORDER BY data, horario");
     }
 
     //RetrieveLast
@@ -90,14 +91,15 @@ public class ConsultaDAO extends DAO {
         try {
             final PreparedStatement stmt;
             stmt = DAO.getConnection()
-                    .prepareStatement("UPDATE consulta SET data=?, historico=?, id_animal=?, id_vet=?, id_tratamento=?, terminado=? WHERE id=?");
-            stmt.setString(1, dateTimeFormat.format(consulta.getDataConsulta()));
-            stmt.setString(2, consulta.getHistorico());
-            stmt.setInt(3, consulta.getIdAnimal());
-            stmt.setInt(4, consulta.getIdVeterinario());
-            stmt.setInt(5, consulta.getIdTratamento());
-            stmt.setInt(6, consulta.isTerminou() ? 1 : 0);
-            stmt.setInt(7, consulta.getId());
+                    .prepareStatement("UPDATE consulta SET data=?, horario=?, historico=?, id_animal=?, id_vet=?, id_tratamento=?, terminado=? WHERE id=?");
+            stmt.setString(1, dateFormat.format(consulta.getDataConsulta()));
+            stmt.setString(2, consulta.getHorario());
+            stmt.setString(3, consulta.getHistorico());
+            stmt.setInt(4, consulta.getIdAnimal());
+            stmt.setInt(5, consulta.getIdVeterinario());
+            stmt.setInt(6, consulta.getIdTratamento());
+            stmt.setInt(7, consulta.isTerminou() ? 1 : 0);
+            stmt.setInt(8, consulta.getId());
             executeUpdate(stmt);
         } catch (final SQLException e) {
             System.err.println("Exception: " + e.getMessage());

@@ -28,5 +28,6 @@ Any value defined here will override the pom.xml file value but is only applicab
         <org-netbeans-modules-editor-indent.text.x-php5.CodeStyle.project.enable-indent>true</org-netbeans-modules-editor-indent.text.x-php5.CodeStyle.project.enable-indent>
         <org-netbeans-modules-editor-indent.text.xml.CodeStyle.project.enable-indent>true</org-netbeans-modules-editor-indent.text.xml.CodeStyle.project.enable-indent>
         <org-netbeans-modules-editor-indent.text.html.CodeStyle.project.enable-indent>true</org-netbeans-modules-editor-indent.text.html.CodeStyle.project.enable-indent>
+        <org-netbeans-modules-editor-indent.text.x-java.CodeStyle.project.labelIndent>4</org-netbeans-modules-editor-indent.text.x-java.CodeStyle.project.labelIndent>
     </properties>
 </project-shared-configuration>

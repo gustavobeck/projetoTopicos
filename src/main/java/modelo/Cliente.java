@@ -70,7 +70,7 @@ public class Cliente {
     }
 
     public void setEmail(final String email) {
-        if (StringUtils.isBlank(email)) {
+        if (StringUtils.isBlank(this.email)) {
             this.email = email;
         }
     }

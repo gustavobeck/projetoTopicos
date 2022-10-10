@@ -1,12 +1,6 @@
 package modelo;
 
-import java.sql.Connection;
-import java.sql.DatabaseMetaData;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -14,7 +8,6 @@ import java.util.logging.Logger;
 public abstract class DAO {
 
     public static final String DBURL = "jdbc:sqlite:vet.db";
-    protected static DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
     protected static DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     private static Connection con;
 
@@ -122,7 +115,8 @@ public abstract class DAO {
             //Table consulta
             stmt = DAO.getConnection().prepareStatement("CREATE TABLE IF NOT EXISTS consulta( \n" +
                     "id INTEGER PRIMARY KEY, \n" +
-                    "data TEXT, \n" +
+                    "data DATE, \n" +
+                    "horario VARCHAR, \n" +
                     "historico VARCHAR, \n" +
                     "id_animal INTEGER, \n" +
                     "id_vet INTEGER, \n" +
