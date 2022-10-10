@@ -86,6 +86,7 @@ public class ConsultaTableModel extends GenericTableModel {
                 break;
             case 6:
                 consulta.setTerminou((Boolean) aValue);
+                break;
             default:
                 throw new IndexOutOfBoundsException("columnIndex out of bounds");
         }

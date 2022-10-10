@@ -6,7 +6,6 @@ package view;
 
 import controller.Controller;
 import javax.swing.JOptionPane;
-import modelo.Especie;
 
 /**
  *
@@ -28,6 +27,8 @@ public class Principal extends javax.swing.JFrame {
         jTextField4.setEditable(false);
         jTextField5.setText("");
         jTextField5.setEditable(false);
+        jTextField6.setText("");
+        jTextField6.setEditable(false);
         Controller.jRadioButtonClientesSelecionado(jTable1);
         //Controller.setTableModel(jTable1, new ClienteTableModel(ClienteDAO.getInstance().retrieveAll()));
         jRadioButton1.setSelected(true);
