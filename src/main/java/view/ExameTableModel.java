@@ -5,12 +5,12 @@
 package view;
 
 
-import java.util.List;
 import modelo.Exame;
 import modelo.ExameDAO;
 
+import java.util.List;
+
 /**
- *
  * @author gubec
  */
 public class ExameTableModel extends GenericTableModel {
@@ -21,12 +21,10 @@ public class ExameTableModel extends GenericTableModel {
 
     @Override
     public Class<?> getColumnClass(final int columnIndex) {
-        switch (columnIndex) {
-            case 0:
-                return String.class;
-            default:
-                throw new IndexOutOfBoundsException("columnIndex out of bounds");
+        if (columnIndex == 0) {
+            return String.class;
         }
+        throw new IndexOutOfBoundsException("columnIndex out of bounds");
     }
 
     @Override
@@ -46,12 +44,10 @@ public class ExameTableModel extends GenericTableModel {
     public void setValueAt(final Object aValue, final int rowIndex, final int columnIndex) {
         final Exame exame = (Exame) this.vDados.get(rowIndex);
 
-        switch (columnIndex) {
-            case 0:
-                exame.setNome((String) aValue);
-                break;
-            default:
-                throw new IndexOutOfBoundsException("columnIndex out of bounds");
+        if (columnIndex == 0) {
+            exame.setNome((String) aValue);
+        } else {
+            throw new IndexOutOfBoundsException("columnIndex out of bounds");
         }
         ExameDAO.getInstance().update(exame);
     }

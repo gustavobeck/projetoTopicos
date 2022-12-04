@@ -72,8 +72,8 @@ public class ConsultaTableModel extends GenericTableModel {
 
         switch (columnIndex) {
             case 0:
-                String date = (String) aValue;
-                LocalDate dataTratamento = LocalDate.parse(date, dateFormat);
+                final String date = (String) aValue;
+                final LocalDate dataTratamento = LocalDate.parse(date, dateFormat);
                 consulta.setDataConsulta(dataTratamento);
                 break;
             case 1:

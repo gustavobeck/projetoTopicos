@@ -5,15 +5,16 @@
 package view;
 
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.List;
 import modelo.Animal;
 import modelo.AnimalDAO;
 import modelo.Tratamento;
 import modelo.TratamentoDAO;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+
 /**
- *
  * @author gubec
  */
 public class TratamentoTableModel extends GenericTableModel {
@@ -69,19 +70,19 @@ public class TratamentoTableModel extends GenericTableModel {
                 tratamento.setNome((String) aValue);
                 break;
             case 1:
-                String date = (String) aValue;
-                LocalDate dataTratamento = LocalDate.parse(date, dateFormat);
+                final String date = (String) aValue;
+                final LocalDate dataTratamento = LocalDate.parse(date, dateFormat);
                 tratamento.setDataInicio(dataTratamento);
                 break;
             case 2:
-                String dataFim = (String) aValue;
-                LocalDate dataTratamentoFim = LocalDate.parse(dataFim, dateFormat);
+                final String dataFim = (String) aValue;
+                final LocalDate dataTratamentoFim = LocalDate.parse(dataFim, dateFormat);
                 tratamento.setDataFim(dataTratamentoFim);
                 break;
             case 3:
                 break;
             case 4:
-                tratamento.setTerminou((Boolean) aValue); 
+                tratamento.setTerminou((Boolean) aValue);
                 break;
             default:
                 throw new IndexOutOfBoundsException("columnIndex out of bounds");

@@ -1,13 +1,12 @@
 package controller;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import modelo.*;
 import view.*;
 
 import javax.swing.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-
 import java.util.List;
 
 public class Controller {
@@ -170,7 +169,7 @@ public class Controller {
             }
         } else if (table.getModel() instanceof EspecieTableModel) {
             if (table.getSelectedRow() >= 0) {
-                Object item = ((GenericTableModel) table.getModel()).getItem(table.getSelectedRow());
+                final Object item = ((GenericTableModel) table.getModel()).getItem(table.getSelectedRow());
                 ((EspecieTableModel) table.getModel()).removeItem(table.getSelectedRow());
                 EspecieDAO.getInstance().delete((Especie) item);
             } else {
@@ -180,22 +179,21 @@ public class Controller {
     }
 
     //Consultas
-        public static boolean adicionaTabela2(final JTable table) {
+    public static boolean adicionaTabela2(final JTable table) {
         if (table.getModel() instanceof ConsultaTableModel) {
-            if((clienteSelecionado!=null) && (animalSelecionado!=null) && (veterinarioSelecionado!=null)){
+            if ((clienteSelecionado != null) && (animalSelecionado != null) && (veterinarioSelecionado != null)) {
                 ((GenericTableModel) table.getModel()).addItem(ConsultaDAO.getInstance().create(LocalDate.now(), "", "", animalSelecionado.getId(), veterinarioSelecionado.getId(), 0, false));
-            }
-            else {
+            } else {
                 return false;
             }
         } else if (table.getModel() instanceof ExameTableModel) {
             ((GenericTableModel) table.getModel()).addItem(ExameDAO.getInstance().create("", consultaSelecionada.getId()));
-        } else if(table.getModel() instanceof TratamentoTableModel) {
+        } else if (table.getModel() instanceof TratamentoTableModel) {
             ((GenericTableModel) table.getModel()).addItem(TratamentoDAO.getInstance().create("", LocalDate.now(), LocalDate.now(), animalSelecionado.getId(), false));
         }
         return true;
     }
-        
+
     public static void removeTable2(final JTable table, final JFrame jFrame) {
         if (table.getRowCount() == 0) {
             JOptionPane.showMessageDialog(jFrame, "Não há nenhum registro para ser deletado.");
@@ -210,7 +208,7 @@ public class Controller {
             }
         } else if (table.getModel() instanceof ExameTableModel) {
             if (table.getSelectedRow() >= 0) {
-                Object item = ((GenericTableModel) table.getModel()).getItem(table.getSelectedRow());
+                final Object item = ((GenericTableModel) table.getModel()).getItem(table.getSelectedRow());
                 ((GenericTableModel) table.getModel()).removeItem(table.getSelectedRow());
                 ExameDAO.getInstance().delete((Exame) item);
             } else {
@@ -218,7 +216,7 @@ public class Controller {
             }
         } else if (table.getModel() instanceof TratamentoTableModel) {
             if (table.getSelectedRow() >= 0) {
-                Object item = ((GenericTableModel) table.getModel()).getItem(table.getSelectedRow());
+                final Object item = ((GenericTableModel) table.getModel()).getItem(table.getSelectedRow());
                 ((GenericTableModel) table.getModel()).removeItem(table.getSelectedRow());
                 TratamentoDAO.getInstance().delete((Tratamento) item);
             } else {
@@ -226,40 +224,36 @@ public class Controller {
             }
         }
     }
-    
+
     public static List getTodasConsultas() {
         return ConsultaDAO.getInstance().retrieveAll();
     }
-    
-    public static void filtraConsultas(JTable table, JToggleButton jtTodas, JToggleButton jtHoje, JToggleButton jtVet) {
-        if(table.getModel() instanceof ConsultaTableModel) {
+
+    public static void filtraConsultas(final JTable table, final JToggleButton jtTodas, final JToggleButton jtHoje, final JToggleButton jtVet) {
+        if (table.getModel() instanceof ConsultaTableModel) {
             String where = "";
-            if(jtTodas.isSelected()) {
+            if (jtTodas.isSelected()) {
                 where = "";
-            }
-            else if(jtHoje.isSelected()) {
-                if(jtVet.isSelected()) {
-                     where = " WHERE data = '" + dateFormat.format(LocalDate.now()) + "' and id_vet = " + veterinarioSelecionado.getId();
-                }
-                else {
+            } else if (jtHoje.isSelected()) {
+                if (jtVet.isSelected()) {
+                    where = " WHERE data = '" + dateFormat.format(LocalDate.now()) + "' and id_vet = " + veterinarioSelecionado.getId();
+                } else {
                     where = " WHERE data = '" + dateFormat.format(LocalDate.now()) + "'";
                 }
-            }
-            else if(jtVet.isSelected()) {
-                if(jtHoje.isSelected()) {
+            } else if (jtVet.isSelected()) {
+                if (jtHoje.isSelected()) {
                     where = " WHERE data = '" + dateFormat.format(LocalDate.now()) + "' and id_vet = " + veterinarioSelecionado.getId();
-                }
-               else {
+                } else {
                     where = " WHERE id_vet = " + veterinarioSelecionado.getId();
                 }
             }
-            
-            String query = "SELECT * from consulta" + where + " ORDER BY data, horario"; 
+
+            final String query = "SELECT * from consulta" + where + " ORDER BY data, horario";
             ((GenericTableModel) table.getModel()).addListOfItems(ConsultaDAO.getInstance().retrieve(query));
         }
     }
-    
-    
+
+
     public static boolean jRadioButtonExameSelecionado(final JTable table) {
         if (consultaSelecionada != null) {
             setTableModel(table, new ExameTableModel(ExameDAO.getInstance().retrieveByIdConsulta(consultaSelecionada.getId())));
@@ -267,7 +261,7 @@ public class Controller {
         }
         return false;
     }
-    
+
     public static boolean jRadioButtonTratamentoSelecionado(final JTable table) {
         if (animalSelecionado != null) {
             setTableModel(table, new TratamentoTableModel(TratamentoDAO.getInstance().retrieveByIdAnimal(animalSelecionado.getId())));
