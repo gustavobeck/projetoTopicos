@@ -6,6 +6,7 @@ package view;
 
 import controller.Controller;
 import javax.swing.JOptionPane;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  *
@@ -18,6 +19,9 @@ public class Principal extends javax.swing.JFrame {
         buttonGroup1.add(jRadioButton2);
         buttonGroup1.add(jRadioButton3);
         buttonGroup1.add(jRadioButton4);  
+        buttonGroup2.add(jRadioButton5);
+        buttonGroup2.add(jRadioButton6);
+        buttonGroup2.add(jRadioButton7);
         jTextField1.setText("");
         jTextField1.setEditable(false);
         jTextField2.setText("");
@@ -25,16 +29,15 @@ public class Principal extends javax.swing.JFrame {
         jTextField3.setText("");
         jTextField4.setText("");
         jTextField4.setEditable(false);
-        jTextField5.setText("");
-        jTextField5.setEditable(false);
         jTextField6.setText("");
         jTextField6.setEditable(false);
         Controller.jRadioButtonClientesSelecionado(jTable1);
         //Controller.setTableModel(jTable1, new ClienteTableModel(ClienteDAO.getInstance().retrieveAll()));
         jRadioButton1.setSelected(true);
-        Controller.setTextFields(jTextField1, jTextField2, jTextField4, jTextField5);
+        Controller.setTextFields(jTextField1, jTextField2, jTextField4, jTextField6);
         jButton4.setEnabled(false);
 
+        jRadioButton5.setSelected(true);
         Controller.setTableModel(jTable2, new ConsultaTableModel(Controller.getTodasConsultas()));
     }
 
@@ -56,6 +59,7 @@ public class Principal extends javax.swing.JFrame {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
+        buttonGroup2 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -64,8 +68,6 @@ public class Principal extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jTextField4 = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jTextField6 = new javax.swing.JTextField();
         jTabbedPane1 = new javax.swing.JTabbedPane();
@@ -90,16 +92,9 @@ public class Principal extends javax.swing.JFrame {
         jToggleButton1 = new javax.swing.JToggleButton();
         jToggleButton2 = new javax.swing.JToggleButton();
         jToggleButton3 = new javax.swing.JToggleButton();
-        jPanel4 = new javax.swing.JPanel();
-        jButton8 = new javax.swing.JButton();
-        jButton9 = new javax.swing.JButton();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
-        jPanel5 = new javax.swing.JPanel();
-        jButton10 = new javax.swing.JButton();
-        jButton11 = new javax.swing.JButton();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        jTable4 = new javax.swing.JTable();
+        jRadioButton5 = new javax.swing.JRadioButton();
+        jRadioButton6 = new javax.swing.JRadioButton();
+        jRadioButton7 = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -124,11 +119,7 @@ public class Principal extends javax.swing.JFrame {
 
         jTextField4.setText("jTextField4");
 
-        jLabel5.setText("Espécie:");
-
-        jTextField5.setText("jTextField5");
-
-        jLabel6.setText("Consulta");
+        jLabel6.setText("Consulta:");
 
         jTextField6.setText("jTextField6");
 
@@ -148,19 +139,15 @@ public class Principal extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTextField2))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton4)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jTextField4))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField5))
+                        .addComponent(jButton4)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(12, 12, 12)
                         .addComponent(jTextField6)))
                 .addContainerGap())
         );
@@ -181,15 +168,17 @@ public class Principal extends javax.swing.JFrame {
                     .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
                 .addComponent(jButton4))
         );
+
+        jTabbedPane1.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jTabbedPane1StateChanged(evt);
+            }
+        });
 
         jRadioButton1.setText("Cadastro Clientes");
         jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -355,13 +344,44 @@ public class Principal extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTable2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jTable2MousePressed(evt);
+            }
+        });
         jScrollPane2.setViewportView(jTable2);
 
         jToggleButton1.setText("Todas");
+        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton1ActionPerformed(evt);
+            }
+        });
 
         jToggleButton2.setText("Hoje");
 
         jToggleButton3.setText("Veterinário");
+
+        jRadioButton5.setText("Consultas");
+        jRadioButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton5ActionPerformed(evt);
+            }
+        });
+
+        jRadioButton6.setText("Exames");
+        jRadioButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton6ActionPerformed(evt);
+            }
+        });
+
+        jRadioButton7.setText("Tratamentos");
+        jRadioButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton7ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -375,14 +395,22 @@ public class Principal extends javax.swing.JFrame {
                         .addComponent(jButton5)
                         .addGap(18, 18, 18)
                         .addComponent(jButton6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 339, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 357, Short.MAX_VALUE)
                         .addComponent(jButton7)
                         .addGap(18, 18, 18)
                         .addComponent(jToggleButton1)
                         .addGap(18, 18, 18)
                         .addComponent(jToggleButton2)
                         .addGap(18, 18, 18)
-                        .addComponent(jToggleButton3)))
+                        .addComponent(jToggleButton3))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(jRadioButton5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jRadioButton6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jRadioButton7)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -396,104 +424,17 @@ public class Principal extends javax.swing.JFrame {
                     .addComponent(jToggleButton1)
                     .addComponent(jToggleButton2)
                     .addComponent(jToggleButton3))
-                .addGap(18, 18, 18)
+                .addGap(5, 5, 5)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jRadioButton5)
+                    .addComponent(jRadioButton6)
+                    .addComponent(jRadioButton7))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 504, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         jTabbedPane1.addTab("Consultas", jPanel3);
-
-        jButton8.setText("Novo");
-
-        jButton9.setText("Apaga");
-
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane3.setViewportView(jTable3);
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 807, Short.MAX_VALUE)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jButton8)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton9)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton8)
-                    .addComponent(jButton9))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 504, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
-        jTabbedPane1.addTab("Exames", jPanel4);
-
-        jButton10.setText("Novo");
-
-        jButton11.setText("Apaga");
-
-        jTable4.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane4.setViewportView(jTable4);
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 807, Short.MAX_VALUE)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jButton10)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton11)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton10)
-                    .addComponent(jButton11))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 504, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
-        jTabbedPane1.addTab("Tratamentos", jPanel5);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -519,51 +460,6 @@ public class Principal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
-        Controller.jRadioButtonClientesSelecionado(jTable1);
-    }//GEN-LAST:event_jRadioButton1ActionPerformed
-
-    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
-        if(!Controller.jRadioButtonAnimaisSelecionado(jTable1)) {
-            JOptionPane.showMessageDialog(this, "Selecione um cliente");
-            jRadioButton2.setSelected(false);
-            jRadioButton1.doClick();
-        }
-        
-    }//GEN-LAST:event_jRadioButton2ActionPerformed
-
-    private void jTable1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MousePressed
-        // TODO add your handling code here:
-        final Object object = ((GenericTableModel)jTable1.getModel()).getItem(jTable1.getSelectedRow());
-        Controller.setSelected(object);
-        jButton4.setEnabled(true);
-    }//GEN-LAST:event_jTable1MousePressed
-
-    private void jRadioButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton3ActionPerformed
-        Controller.jRadioButtonEspeciesSelecionado(jTable1);
-    }//GEN-LAST:event_jRadioButton3ActionPerformed
-
-    private void jRadioButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton4ActionPerformed
-        Controller.jRadioButtonVeterinariosSelecionado(jTable1);
-    }//GEN-LAST:event_jRadioButton4ActionPerformed
-
-    private void jTextField3KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField3KeyTyped
-        Controller.atualizaNomeParecido(jTable1, jTextField3.getText());
-    }//GEN-LAST:event_jTextField3KeyTyped
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        Controller.adiciona(jTable1);       
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Controller.atualizaBotaoTodos(jTable1);
-        jTextField3.setText("");
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        Controller.remove(jTable1, this);
-    }//GEN-LAST:event_jButton3ActionPerformed
-
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         Controller.limparSelecao();
         if(jRadioButton2.isSelected()) {
@@ -573,17 +469,143 @@ public class Principal extends javax.swing.JFrame {
         jButton4.setEnabled(false);
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void jRadioButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton6ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
+        if(!Controller.jRadioButtonExameSelecionado(jTable2)) {
+            JOptionPane.showMessageDialog(this, "Selecione uma consulta");
+            jRadioButton6.setSelected(false);
+            jRadioButton5.doClick();
+        }
+        else {
+            jButton7.setVisible(false);
+            jToggleButton1.setVisible(false);
+            jToggleButton2.setVisible(false);
+            jToggleButton3.setVisible(false);
+        }
+    }//GEN-LAST:event_jRadioButton6ActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton6ActionPerformed
+        if(jToggleButton1.isSelected()) {
+            jToggleButton2.setEnabled(false);
+            jToggleButton3.setEnabled(false);
+        }
+        else {
+            jToggleButton2.setEnabled(true);
+            jToggleButton3.setEnabled(true);
+        }
+    }//GEN-LAST:event_jToggleButton1ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
+        if(jToggleButton3.isSelected()) {
+            if(StringUtils.isBlank(jTextField4.getText())) {
+                JOptionPane.showMessageDialog(this, "Selecione um veterinario");
+            }
+            else {
+                Controller.filtraConsultas(jTable2, jToggleButton1, jToggleButton2, jToggleButton3);
+            }
+        }
+        else {
+            Controller.filtraConsultas(jTable2, jToggleButton1, jToggleButton2, jToggleButton3);
+        }
     }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+        Controller.removeTable2(jTable2, this);
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        if(!Controller.adicionaTabela2(jTable2)) {
+            JOptionPane.showMessageDialog(this, "Selecione um Cliente, um Animal e um Veterinário.");
+        }
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jTable1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MousePressed
+        // TODO add your handling code here:
+        final Object object = ((GenericTableModel)jTable1.getModel()).getItem(jTable1.getSelectedRow());
+        Controller.setSelected(object);
+        jButton4.setEnabled(true);
+    }//GEN-LAST:event_jTable1MousePressed
+
+    private void jTextField3KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField3KeyTyped
+        Controller.atualizaNomeParecido(jTable1, jTextField3.getText());
+    }//GEN-LAST:event_jTextField3KeyTyped
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        Controller.remove(jTable1, this);
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        Controller.adiciona(jTable1);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        Controller.atualizaBotaoTodos(jTable1);
+        jTextField3.setText("");
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jRadioButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton4ActionPerformed
+        Controller.jRadioButtonVeterinariosSelecionado(jTable1);
+    }//GEN-LAST:event_jRadioButton4ActionPerformed
+
+    private void jRadioButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton3ActionPerformed
+        Controller.jRadioButtonEspeciesSelecionado(jTable1);
+    }//GEN-LAST:event_jRadioButton3ActionPerformed
+
+    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
+        if(!Controller.jRadioButtonAnimaisSelecionado(jTable1)) {
+            JOptionPane.showMessageDialog(this, "Selecione um cliente");
+            jRadioButton2.setSelected(false);
+            jRadioButton1.doClick();
+        }
+
+    }//GEN-LAST:event_jRadioButton2ActionPerformed
+
+    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+        Controller.jRadioButtonClientesSelecionado(jTable1);
+    }//GEN-LAST:event_jRadioButton1ActionPerformed
+
+    private void jTable2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MousePressed
+        // TODO add your handling code here:
+        final Object object = ((GenericTableModel)jTable2.getModel()).getItem(jTable2.getSelectedRow());
+        Controller.setSelected(object);
+        jButton4.setEnabled(true);
+    }//GEN-LAST:event_jTable2MousePressed
+
+    private void jRadioButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton5ActionPerformed
+        // TODO add your handling code here:
+        Controller.setTableModel(jTable2, new ConsultaTableModel(Controller.getTodasConsultas()));
+        jButton7.setVisible(true);
+        jToggleButton1.setVisible(true);
+        jToggleButton2.setVisible(true);
+        jToggleButton3.setVisible(true);
+    }//GEN-LAST:event_jRadioButton5ActionPerformed
+
+    private void jRadioButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton7ActionPerformed
+        // TODO add your handling code here:
+        if(!Controller.jRadioButtonTratamentoSelecionado(jTable2)) {
+            JOptionPane.showMessageDialog(this, "Selecione um animal.");
+            jTabbedPane1.setSelectedIndex(0);
+            jRadioButton5.setSelected(true);
+            jRadioButton2.doClick();
+        }
+        else {
+            jButton7.setVisible(false);
+            jToggleButton1.setVisible(false);
+            jToggleButton2.setVisible(false);
+            jToggleButton3.setVisible(false);
+        }
+    }//GEN-LAST:event_jRadioButton7ActionPerformed
+
+    private void jTabbedPane1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPane1StateChanged
+        // TODO add your handling code here:
+        if(jTabbedPane1.getSelectedIndex() == 0) {
+            jRadioButton5.doClick();
+        }
+    }//GEN-LAST:event_jTabbedPane1StateChanged
 
     /**
      * @param args the command line arguments
@@ -623,46 +645,38 @@ public class Principal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JRadioButton jRadioButton4;
+    private javax.swing.JRadioButton jRadioButton5;
+    private javax.swing.JRadioButton jRadioButton6;
+    private javax.swing.JRadioButton jRadioButton7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTable3;
-    private javax.swing.JTable jTable4;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JToggleButton jToggleButton2;

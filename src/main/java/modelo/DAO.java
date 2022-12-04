@@ -116,7 +116,7 @@ public abstract class DAO {
             stmt = DAO.getConnection().prepareStatement("CREATE TABLE IF NOT EXISTS consulta( \n" +
                     "id INTEGER PRIMARY KEY, \n" +
                     "data DATE, \n" +
-                    "horario VARCHAR, \n" +
+                    "horario INTEGER, \n" +
                     "historico VARCHAR, \n" +
                     "id_animal INTEGER, \n" +
                     "id_vet INTEGER, \n" +

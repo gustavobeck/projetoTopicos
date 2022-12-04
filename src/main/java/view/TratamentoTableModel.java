@@ -4,35 +4,34 @@
  */
 package view;
 
-import modelo.*;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-
+import modelo.Animal;
+import modelo.AnimalDAO;
+import modelo.Tratamento;
+import modelo.TratamentoDAO;
 /**
+ *
  * @author gubec
  */
-public class ConsultaTableModel extends GenericTableModel {
-
+public class TratamentoTableModel extends GenericTableModel {
     protected static DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-    public ConsultaTableModel(final List vDados) {
-        super(vDados, new String[]{"Data", "Hora", "Cliente", "Animal", "Veterinário", "Observações", "Fim"});
+    public TratamentoTableModel(final List vDados) {
+        super(vDados, new String[]{"Nome", "Data Inicio", "Data Fim", "Animal", "Terminou"});
     }
 
     @Override
     public Class<?> getColumnClass(final int columnIndex) {
         switch (columnIndex) {
-            case 1:
-                return Integer.class;
             case 0:
+            case 1:
             case 2:
             case 3:
-            case 4:
-            case 5:
                 return String.class;
-            case 6:
+            case 4:
                 return Boolean.class;
             default:
                 throw new IndexOutOfBoundsException("columnIndex out of bounds");
@@ -41,26 +40,21 @@ public class ConsultaTableModel extends GenericTableModel {
 
     @Override
     public Object getValueAt(final int rowIndex, final int columnIndex) {
-        final Consulta consulta = (Consulta) this.vDados.get(rowIndex);
+        final Tratamento tratamento = (Tratamento) this.vDados.get(rowIndex);
         final Animal animal;
 
         switch (columnIndex) {
             case 0:
-                return dateFormat.format(consulta.getDataConsulta());
+                return tratamento.getNome();
             case 1:
-                return consulta.getHorario();
+                return dateFormat.format(tratamento.getDataInicio());
             case 2:
-                animal = AnimalDAO.getInstance().retrieveById(consulta.getIdAnimal());
-                return ClienteDAO.getInstance().retrieveById(animal.getIdCliente()).getNome();
+                return dateFormat.format(tratamento.getDataFim());
             case 3:
-                animal = AnimalDAO.getInstance().retrieveById(consulta.getIdAnimal());
+                animal = AnimalDAO.getInstance().retrieveById(tratamento.getIdAnimal());
                 return animal.getNome();
             case 4:
-                return VeterinarioDAO.getInstance().retrieveById(consulta.getIdVeterinario()).getNome();
-            case 5:
-                return consulta.getHistorico();
-            case 6:
-                return consulta.isTerminou();
+                return tratamento.isTerminou();
             default:
                 throw new IndexOutOfBoundsException("columnIndex out of bounds");
         }
@@ -68,35 +62,35 @@ public class ConsultaTableModel extends GenericTableModel {
 
     @Override
     public void setValueAt(final Object aValue, final int rowIndex, final int columnIndex) {
-        final Consulta consulta = (Consulta) this.vDados.get(rowIndex);
+        final Tratamento tratamento = (Tratamento) this.vDados.get(rowIndex);
 
         switch (columnIndex) {
             case 0:
-                String date = (String) aValue;
-                LocalDate dataTratamento = LocalDate.parse(date, dateFormat);
-                consulta.setDataConsulta(dataTratamento);
+                tratamento.setNome((String) aValue);
                 break;
             case 1:
-                consulta.setHorario((Integer) aValue);
+                String date = (String) aValue;
+                LocalDate dataTratamento = LocalDate.parse(date, dateFormat);
+                tratamento.setDataInicio(dataTratamento);
                 break;
             case 2:
+                String dataFim = (String) aValue;
+                LocalDate dataTratamentoFim = LocalDate.parse(dataFim, dateFormat);
+                tratamento.setDataFim(dataTratamentoFim);
+                break;
             case 3:
+                break;
             case 4:
-                break;
-            case 5:
-                consulta.setHistorico((String) aValue);
-                break;
-            case 6:
-                consulta.setTerminou((Boolean) aValue);
+                tratamento.setTerminou((Boolean) aValue); 
                 break;
             default:
                 throw new IndexOutOfBoundsException("columnIndex out of bounds");
         }
-        ConsultaDAO.getInstance().update(consulta);
+        TratamentoDAO.getInstance().update(tratamento);
     }
 
     @Override
     public boolean isCellEditable(final int rowIndex, final int columnIndex) {
-        return (columnIndex < 2) || (columnIndex > 4);
+        return (columnIndex != 3);
     }
 }

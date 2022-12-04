@@ -48,7 +48,7 @@ public class ConsultaDAO extends DAO {
         Consulta consulta = null;
         try {
             consulta =
-                    new Consulta(rs.getInt("id"), LocalDate.parse(rs.getString("data"), dateFormat), rs.getString("horario"), rs.getString("historico"), rs.getInt("id_animal"),
+                    new Consulta(rs.getInt("id"), LocalDate.parse(rs.getString("data"), dateFormat), rs.getInt("horario"), rs.getString("historico"), rs.getInt("id_animal"),
                             rs.getInt("id_vet"), rs.getInt("id_tratamento"), rs.getInt("terminado") == 1);
         } catch (final SQLException e) {
             System.err.println("Exception: " + e.getMessage());
@@ -57,8 +57,8 @@ public class ConsultaDAO extends DAO {
     }
 
     //Generic Retrieve
-    public List<Consulta> retrieve(final String query) {
-        final List<Consulta> consultas = new ArrayList<>();
+    public List<Object> retrieve(final String query) {
+        final List<Object> consultas = new ArrayList<>();
         final ResultSet rs = getResultSet(query);
         try {
             while (rs.next()) {
@@ -71,19 +71,19 @@ public class ConsultaDAO extends DAO {
     }
 
     //RetrieveAll
-    public List<Consulta> retrieveAll() {
+    public List<Object> retrieveAll() {
         return this.retrieve("SELECT * FROM consulta ORDER BY data, horario");
     }
 
     //RetrieveLast
-    public List<Consulta> retrieveLast() {
+    public List<Object> retrieveLast() {
         return this.retrieve("SELECT * FROM consulta WHERE id = " + lastId("consulta", "id"));
     }
 
     //RetrieveById
     public Consulta retrieveById(final Integer id) {
-        final List<Consulta> consultas = this.retrieve("SELECT * FROM consulta WHERE id = " + id);
-        return (consultas.isEmpty() ? null : consultas.get(0));
+        final List<Object> consultas = this.retrieve("SELECT * FROM consulta WHERE id = " + id);
+        return (Consulta)(consultas.isEmpty() ? null : consultas.get(0));
     }
 
     //Update
@@ -93,7 +93,7 @@ public class ConsultaDAO extends DAO {
             stmt = DAO.getConnection()
                     .prepareStatement("UPDATE consulta SET data=?, horario=?, historico=?, id_animal=?, id_vet=?, id_tratamento=?, terminado=? WHERE id=?");
             stmt.setString(1, dateFormat.format(consulta.getDataConsulta()));
-            stmt.setString(2, consulta.getHorario());
+            stmt.setInt(2, consulta.getHorario());
             stmt.setString(3, consulta.getHistorico());
             stmt.setInt(4, consulta.getIdAnimal());
             stmt.setInt(5, consulta.getIdVeterinario());

@@ -71,6 +71,11 @@ public class ExameDAO extends DAO {
         final List<Exame> exames = this.retrieve("SELECT * FROM exame WHERE id = " + id);
         return (exames.isEmpty() ? null : exames.get(0));
     }
+    
+    //RetrieveByIdConsulta
+    public List retrieveByIdConsulta(final Integer id) {
+       return this.retrieve("SELECT * FROM exame WHERE id_consulta = " + id);
+    }
 
     //Update
     public void update(final Exame exame) {

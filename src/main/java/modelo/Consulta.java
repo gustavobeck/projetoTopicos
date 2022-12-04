@@ -6,14 +6,14 @@ public class Consulta {
 
     private Integer id;
     private LocalDate dataConsulta;
-    private String horario;
+    private Integer horario;
     private String historico;
     private Integer idAnimal;
     private Integer idVeterinario;
     private Integer idTratamento;
     private boolean terminou;
 
-    public Consulta(final Integer id, final LocalDate dataConsulta, final String horario, final String historico, final Integer idAnimal, final Integer idVeterinario, final Integer idTratamento, final boolean terminou) {
+    public Consulta(final Integer id, final LocalDate dataConsulta, final Integer horario, final String historico, final Integer idAnimal, final Integer idVeterinario, final Integer idTratamento, final boolean terminou) {
         this.id = id;
         this.dataConsulta = dataConsulta;
         this.horario = horario;
@@ -80,11 +80,11 @@ public class Consulta {
         this.terminou = terminou;
     }
 
-    public String getHorario() {
+    public Integer getHorario() {
         return this.horario;
     }
 
-    public void setHorario(final String horario) {
+    public void setHorario(final Integer horario) {
         this.horario = horario;
     }
 }

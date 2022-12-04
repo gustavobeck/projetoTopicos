@@ -46,7 +46,7 @@ public class TratamentoDAO extends DAO {
         Tratamento tratamento = null;
         try {
             tratamento =
-                    new Tratamento(rs.getInt("id"), rs.getString("nome"), LocalDate.parse(rs.getString("dataInicio"), dateFormat),
+                    new Tratamento(rs.getInt("id"), rs.getString("nome"), LocalDate.parse(rs.getString("dataIni"), dateFormat),
                             LocalDate.parse(rs.getString("dataFim"), dateFormat), rs.getInt("id_animal"),
                             rs.getInt("terminado") == 1);
         } catch (final SQLException e) {
@@ -83,6 +83,11 @@ public class TratamentoDAO extends DAO {
     public Tratamento retrieveById(final Integer id) {
         final List<Tratamento> tratamentos = this.retrieve("SELECT * FROM tratamento WHERE id = " + id);
         return (tratamentos.isEmpty() ? null : tratamentos.get(0));
+    }
+    
+    //RetrieveByIdAnimal
+    public List<Tratamento> retrieveByIdAnimal(final Integer id) {
+        return this.retrieve("SELECT * FROM tratamento where id_animal = " + id);
     }
 
     //Update
