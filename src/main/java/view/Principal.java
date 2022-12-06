@@ -466,6 +466,11 @@ public class Principal extends javax.swing.JFrame {
             jRadioButton2.setSelected(false);
             jRadioButton1.doClick();
         }
+        if(jTabbedPane1.getSelectedIndex() == 1) {
+            jTabbedPane1.setSelectedIndex(0);
+            jRadioButton5.setSelected(true);
+            jRadioButton1.doClick();
+        }
         jButton4.setEnabled(false);
     }//GEN-LAST:event_jButton4ActionPerformed
 
